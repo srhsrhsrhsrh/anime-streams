@@ -1,4 +1,4 @@
-import { connection } from './dbConnector.js';
+import { connection } from './db-connector.js';
 
 /**
  * Can't guarantee that create is working rn

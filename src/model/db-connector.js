@@ -1,5 +1,5 @@
 import mysql from "mysql";
-import { dbConfig } from "../../config/db.config.js";
+import { dbConfig } from "../../config/db-config.js";
 
 /**
  * Creates connection to MySQL db
