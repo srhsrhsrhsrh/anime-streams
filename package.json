@@ -1,0 +1,25 @@
+{
+  "name": "anime-streams",
+  "version": "1.0.0",
+  "description": "provides you with hot and fresh server-hosted anime",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarahl176/anime-streams.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarahl176/anime-streams/issues"
+  },
+  "homepage": "https://github.com/sarahl176/anime-streams#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
