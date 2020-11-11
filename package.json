@@ -4,7 +4,7 @@
   "description": "provides you with hot and fresh server-hosted anime",
   "main": "src/index.js",
   "scripts": {
-    "test": "test"
+    "start": "node src/index.js"
   },
   "type": "module",
   "repository": {

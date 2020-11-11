@@ -6,10 +6,6 @@ export default class Admin {
      */
     static password = "weLuvCharles";
 
-    /**
-     * Suppose we have multiple parameters for the query:
-     *      - genre.body below can be replaced with [genre.body.id, genre.body uuid, etc.]
-     */
     static addGenre = (genre, response) => {
         connection.query("INSERT INTO Genre SET ?", genre.body, (err, res) => {
             if (err) {
@@ -23,5 +19,43 @@ export default class Admin {
         });
     };
 
+    static getGenre = (genre, response) => {
+        connection.query("SELECT * FROM Genre WHERE is_safe=?", genre.params["is_safe"], (err, res) => {
+            if (err) {
+                console.log("Error while adding new genre: ", err);
+                response.send(err);
+                return;
+            }
+
+            console.log("All genres: ", {result: res});
+            response.send({result: res});
+        });
+    };
+
+    static deleteAnime = (anime, response) => {
+        connection.query("DELETE FROM Anime WHERE anime_name=?", anime.body["anime_name"], (err, res) => {
+            if (err) {
+                console.log("Error while deleting anime: ", err);
+                response.send(err);
+                return;
+            }
+
+            console.log("Deleted anime: " + anime.body["anime_name"]);
+            response.send(res.affectedRows + " record(s) updated");
+        });
+    };
+
+    static getEmails = (_, response) => {
+        connection.query("SELECT email FROM User", undefined, (err, res) => {
+            if (err) {
+                console.log("Error while retrieving emails: ", err);
+                response.send(err);
+                return;
+            }
+
+            console.log("Retrieved emails: ", {result: res});
+            response.send({result: res});
+        })
+    }
 
 }
