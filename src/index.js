@@ -25,6 +25,7 @@ app.put("/admin/genre", routes.addGenre);
 app.get("/genre/:is_safe", routes.getGenre);
 
 // body needs whole user object
+// curl -X PUT -H "Content-Type: application/json" -d '{"user_name":"xXTristySimpXx", "password":"simplife4ever", "email":"simp@msn.ca"}' localhost:3000/user/create
 app.put("/user/create", routes.addUser);
 
 // body needs anime_name
@@ -36,7 +37,7 @@ app.post("/user/email", routes.updateEmail);
 // params has anime_name, which should be URL encoded because it might have spaces
 app.get("/episodes/:anime_name", routes.getEpisodes);
 
-// params and body aren't important
+// NOT REQUIRED, params and body aren't important
 app.get("/admin/emails", routes.getEmails);
 
 // set port

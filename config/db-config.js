@@ -1,8 +1,7 @@
 const sarah = {
     USER: "root",
     HOST: "localhost",
-    PASSWORD: "", // REMINDER NOT TO COMMIT
-    DB: "anime"
+    PASSWORD: "" // REMINDER NOT TO COMMIT
 };
 
 /**
@@ -14,5 +13,5 @@ export const dbConfig = {
     HOST: user.HOST,
     USER: user.USER,
     PASSWORD: user.PASSWORD,
-    DB: user.DB
+    DB: "animestreaming"
 };
