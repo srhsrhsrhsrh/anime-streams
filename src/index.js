@@ -20,7 +20,7 @@ app.get("/", (req, res) => { // test route
     res.json({ message: "304 simp gang" });
 });
 
-// test routes (these are the ones tested and working without the full db)
+// test routes
 app.put("/admin/genre", routes.addGenre);
 app.get("/genre/:is_safe", routes.getGenre);
 
@@ -39,6 +39,12 @@ app.get("/episodes/:anime_name", routes.getEpisodes);
 
 // NOT REQUIRED, params and body aren't important
 app.get("/admin/emails", routes.getEmails);
+
+// body has current user email
+app.get("/user/watching", routes.getWatching);
+
+// curl localhost:3000/browse/K/1
+app.get("/browse/:first_letter/:is_safe", routes.getFilteredAnime);
 
 // set port
 app.listen(3000, () => {

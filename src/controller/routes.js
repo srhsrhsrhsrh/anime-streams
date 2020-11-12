@@ -29,4 +29,12 @@ export default class Router {
     static getEmails(_, response) {
         Admin.getEmails(_, response);
     }
+
+    static getWatching(email, response) {
+        User.getWatching(email, response);
+    }
+
+    static getFilteredAnime(filters, response) {
+        User.getFilteredAnime(filters, response);
+    }
 }
