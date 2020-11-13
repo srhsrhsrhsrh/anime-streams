@@ -1,6 +1,9 @@
 import Admin from "../model/admin.js";
 import User from "../model/user.js";
 
+/**
+ * whether a function is located in User/Admin doesn't mean much and can be changed to match the inferface
+ */
 export default class Router {
     static addGenre(genre, response) {
         Admin.addGenre(genre, response);
@@ -36,5 +39,21 @@ export default class Router {
 
     static getFilteredAnime(filters, response) {
         User.getFilteredAnime(filters, response);
+    }
+
+    static getUserActivity(_, response) {
+        Admin.getUserActivity(_, response);
+    }
+
+    static getServersHosting(num_videos, response) {
+        Admin.getServersHosting(num_videos, response);
+    }
+
+    static getAvgComments(anime, response) {
+        Admin.getAvgComments(anime, response);
+    }
+
+    static getWatchersOfGenre(genre, response) {
+        Admin.getWatchersOfGenre(genre, response);
     }
 }

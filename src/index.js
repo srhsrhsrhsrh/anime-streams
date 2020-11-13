@@ -37,7 +37,7 @@ app.post("/user/email", routes.updateEmail);
 // params has anime_name, which should be URL encoded because it might have spaces
 app.get("/episodes/:anime_name", routes.getEpisodes);
 
-// NOT REQUIRED, params and body aren't important
+// NOT REQUIRED TO USE THIS, params and body aren't important
 app.get("/admin/emails", routes.getEmails);
 
 // body has current user email
@@ -45,6 +45,14 @@ app.get("/user/watching", routes.getWatching);
 
 // curl localhost:3000/browse/K/1
 app.get("/browse/:first_letter/:is_safe", routes.getFilteredAnime);
+
+app.get("/user_activity", routes.getUserActivity);
+
+app.get("/servers/hosting/:num_videos", routes.getServersHosting);
+
+app.get("/popularity/:anime_name", routes.getAvgComments);
+
+app.get("/watchedAll/:genre", routes.getWatchersOfGenre);
 
 // set port
 app.listen(3000, () => {
