@@ -52,9 +52,9 @@ export default class Admin {
     };
 
     static getUserActivity = (_, response) => {
-        connection.query("SELECT U.user_username, count(distinct WR.anime_name) " +
+        connection.query("SELECT U.user_name, count(distinct WR.anime_name) " +
             "FROM user U INNER JOIN writes_review WR ON U.email=WR.email " +
-            "GROUP BY U.email ORDER BY count(distinct WR.anime_name)", undefined, (err, res) => {
+            "GROUP BY U.email ORDER BY count(distinct WR.anime_name) desc", undefined, (err, res) => {
             if (err) {
                 Response.sendResponseWithErr(response, err, "Error while getting user comment count");
             } else {
@@ -68,7 +68,6 @@ export default class Admin {
         connection.query("SELECT server.sname, COUNT(video.video_link) " +
             "FROM server " +
             "INNER JOIN video ON server.server_link=video.server_link " +
-            "INNER JOIN movie ON movie.video_link=video.video_link" +
             "GROUP BY server.sname HAVING COUNT(video.video_link)>=?", num_videos.params["num_videos"], (err, res) => {
             if (err) {
                 Response.sendResponseWithErr(response, err, "Error while getting servers");
@@ -79,14 +78,15 @@ export default class Admin {
         });
     };
 
-    static getAvgComments = (_, response) => {
-        connection.query("SELECT anime_name, avg(cnt) FROM " +
-                "(SELECT A.anime_name, E.number, COUNT(C.id) AS cnt " +
-                "FROM anime A INNER JOIN has_episode E ON A.anime_name=E.anime_name " +
+    static getAvgComments = (anime, response) => {
+        connection.query("SELECT B.anime_name, avg(cnt) AS avg_num_comments FROM " +
+                "(SELECT E.anime_name, E.number, COUNT(C.id) AS cnt " +
+                "FROM has_episode E " +
                 "INNER JOIN comment C ON C.video_link=E.video_link " +
-                "GROUP BY A.anime_name, E.number) " +
-            "GROUP BY anime_name " +
-            "ORDER BY avg(cnt) ", undefined, (err, res) => {
+                "WHERE E.anime_name=? " +
+                "GROUP BY E.anime_name, E.number) B " +
+            "GROUP BY B.anime_name " +
+            "ORDER BY avg(cnt) ", decodeURI(anime.params["anime_name"]), (err, res) => {
             if (err) {
                 Response.sendResponseWithErr(response, err, "Error while counting comments");
             } else {
@@ -101,12 +101,11 @@ export default class Admin {
             "(SELECT A.anime_name " +
             "FROM anime A INNER JOIN genre G " +
             "ON A.genre=G.genre " +
-            "WHERE G.genre=? " +
-            "EXCEPT " +
-            "SELECT A1.anime_name " +
-            "FROM anime A1, watches W " +
+            "WHERE G.genre=? AND A.anime_name NOT IN " +
+            "(SELECT A1.anime_name " +
+            "FROM anime A1 INNER JOIN watches W " +
             "ON A1.anime_name=W.anime_name " +
-            "WHERE W.email=U.email)", genre.params["genre"], (err, res) => {
+            "WHERE W.email=U.email))", decodeURI(genre.params["genre"]), (err, res) => {
             if (err) {
                 Response.sendResponseWithErr(response, err, "Error while retrieving users watching all " +
                     "anime of genre " + genre.params["genre"]);

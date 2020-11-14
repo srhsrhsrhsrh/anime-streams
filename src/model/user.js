@@ -3,6 +3,30 @@ import Response from './response.js';
 
 export default class User {
 
+    static getSeries = (_, response) => {
+        connection.query("select distinct has_episode.anime_name, series.num_eps " +
+            "from series inner join has_episode " +
+            "on series.anime_name=has_episode.anime_name", undefined, (err, res) => {
+            if (err) {
+                Response.sendResponseWithErr(response, err, "Error while retrieving series and numbers of episodes");
+            } else {
+                console.log("Retrieved series and number of episodes: ", {result: res});
+                response.send({result: res});
+            }
+        });
+    };
+
+    static getMovies = (_, response) => {
+        connection.query("select * from movie", undefined, (err, res) => {
+            if (err) {
+                Response.sendResponseWithErr(response, err, "Error while retrieving movies");
+            } else {
+                console.log("Retrieved all movies: ", {result: res});
+                response.send({result: res});
+            }
+        });
+    };
+
     static addUser = (user, response) => {
         connection.query("INSERT INTO user SET ?", user.body, (err, res) => {
             if (err) {
@@ -27,10 +51,10 @@ export default class User {
     };
 
     static getEpisodes = (anime, response) => {
-        connection.query("SELECT anime_name, number, video_link " +
+        connection.query("SELECT anime.anime_name, has_episode.number, has_episode.video_link " +
                          "FROM anime INNER JOIN has_episode " +
                          "WHERE anime.anime_name=has_episode.anime_name AND anime.anime_name=?",
-            anime.params["anime_name"], (err, res) => {
+            decodeURI(anime.params["anime_name"]), (err, res) => {
             if (err) {
                 Response.sendResponseWithErr(response, err, "Error while retrieving episodes");
             } else {

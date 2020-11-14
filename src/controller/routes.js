@@ -13,6 +13,14 @@ export default class Router {
         Admin.getGenre(genre, response);
     }
 
+    static getSeries(_, response) {
+        User.getSeries(_, response);
+    }
+
+    static getMovies(_, response) {
+        User.getMovies(_, response);
+    }
+
     static addUser(user, response) {
         User.addUser(user, response);
     }

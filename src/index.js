@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.header("Access-Control-Allow-Methods", "GET,DELETE,POST,PUT");
     return next();
 });
 
@@ -24,34 +24,44 @@ app.get("/", (req, res) => { // test route
 app.put("/admin/genre", routes.addGenre);
 app.get("/genre/:is_safe", routes.getGenre);
 
-// body needs whole user object
+app.get("/series/all", routes.getSeries);
+app.get("/movies/all", routes.getMovies);
+app.get("/admin/emails", routes.getEmails);
+
+/**
+ * USING THE ENDPOINTS BELOW FULFILL MINIMUM REQUIREMENTS
+ */
+
 // curl -X PUT -H "Content-Type: application/json" -d '{"user_name":"xXTristySimpXx", "password":"simplife4ever", "email":"simp@msn.ca"}' localhost:3000/user/create
 app.put("/user/create", routes.addUser);
 
-// body needs anime_name
-app.delete("/admin/anime", routes.deleteAnime);
+// curl -X DELETE -H "Content-Type: application/json" -d '{"anime_name": "The Wind Rises"}' localhost:3000/delete
+app.delete("/delete", routes.deleteAnime);
 
-// body has new_email and old_email
+// curl -X POST -H "Content-Type: application/json" -d '{"new_email":"saaarah99@haha.net", "old_email":"srah99@haha.net"}' localhost:3000/user/email
 app.post("/user/email", routes.updateEmail);
 
-// params has anime_name, which should be URL encoded because it might have spaces
+// anime name must be url encoded
+// curl localhost:3000/episodes/One%20Piece
 app.get("/episodes/:anime_name", routes.getEpisodes);
 
-// NOT REQUIRED TO USE THIS, params and body aren't important
-app.get("/admin/emails", routes.getEmails);
+// curl -X POST -H "Content-Type: application/json" -d '{"email": "felixlei@hotmail.com"}' localhost:3000/user/watching
+app.post("/user/watching", routes.getWatching);
 
-// body has current user email
-app.get("/user/watching", routes.getWatching);
-
-// curl localhost:3000/browse/K/1
 app.get("/browse/:first_letter/:is_safe", routes.getFilteredAnime);
+
+// TODO sarah: possibly add endpoint for adding reviews/comments
 
 app.get("/user_activity", routes.getUserActivity);
 
 app.get("/servers/hosting/:num_videos", routes.getServersHosting);
 
+// TODO sarah: return the comments of a given episode
+
+// anime name must be url encoded
 app.get("/popularity/:anime_name", routes.getAvgComments);
 
+// genre must be url encoded
 app.get("/watchedAll/:genre", routes.getWatchersOfGenre);
 
 // set port
