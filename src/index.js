@@ -31,15 +31,20 @@ app.get("/", (req, res) => { // test route
 
 app.post("/", function(req, res) {
     let user = req.body;
-    console.log(req.body);
-    // request.post('http://www.yoursite.com/formpage',
-    //     { json: { key: 'value' } },
-    //     function (error, response, body) {
-    //         if (!error && response.statusCode == 200) {
-    //             console.log(body);
-    //         }
-    //     }
-    // );
+    console.log(user);
+    request.put(
+        "http://localhost:3000/user/create",
+        {json: true, body: user},
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+            } else {
+                console.log(error);
+            }
+            res.sendFile('index.html', { root: '.'})
+        }
+    );
+
 });
 
 app.get("/userprofile", (req, res) => { // test route
