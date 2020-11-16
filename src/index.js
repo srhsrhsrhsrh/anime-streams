@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './controller/routes.js';
+import request from 'request';
 const app = express();
 
 // parse requests of content-type: application/json
@@ -18,8 +19,27 @@ app.use(function(req, res, next) {
 
 app.use("/assets", express.static('.' + '/assets'));
 
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded());
+
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+
 app.get("/", (req, res) => { // test route
     res.sendFile('index.html', { root: '.' })
+});
+
+app.post("/", function(req, res) {
+    let user = req.body;
+    console.log(req.body);
+    // request.post('http://www.yoursite.com/formpage',
+    //     { json: { key: 'value' } },
+    //     function (error, response, body) {
+    //         if (!error && response.statusCode == 200) {
+    //             console.log(body);
+    //         }
+    //     }
+    // );
 });
 
 app.get("/userprofile", (req, res) => { // test route
