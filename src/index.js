@@ -16,8 +16,14 @@ app.use(function(req, res, next) {
     return next();
 });
 
+app.use("/assets", express.static('.' + '/assets'));
+
 app.get("/", (req, res) => { // test route
-    res.json({ message: "304 simp gang" });
+    res.sendFile('index.html', { root: '.' })
+});
+
+app.get("/userprofile", (req, res) => { // test route
+    res.sendFile('userprofile.html', { root: '.' })
 });
 
 // test routes
