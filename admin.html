@@ -49,7 +49,7 @@
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="#browse">Browse</a></li>
-          <li><a href="admin">Admin</a></li>
+          <li><a href="admin" class="active">Admin</a></li>
         </ul>
       </nav><!-- .nav-menu -->
       <a href="userprofile" class="get-started-btn ml-5 scrollto">Sarah Li</a>
@@ -62,7 +62,7 @@
       <div class="container">
 
         <div class="section-title mt-5">
-          <h2>Welcome, Sarah!</h2>
+          <h2>Welcome, admin!</h2>
           <p>What would you like to do?</p>
         </div>
 
@@ -71,7 +71,7 @@
             <div class="icon-boxes d-flex flex-column justify-content-center">
               <div class="row">
 
-                <div class="col align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                <div class="col" data-aos="zoom-in" data-aos-delay="100">
                   <div class="icon-box iconbox-blue">
                     <div class="icon">
                       <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -79,24 +79,20 @@
                       </svg>
                       <i class="bx bxl-dribbble"></i>
                     </div>
-                    <h4><a href="">Update Email</a></h4>
-                    <p>Please verify your current email, and enter a new email address in.</p>
+                    <h4><a href="">Add new Genre</a></h4>
+                    <p>Add a new genre to sort animes by!</p>
                     <form id="updateEmailForm" action="/userprofile" method="POST" name="updateEmailForm">
                       <div class="form-group mt-4">
-                        <label for="old_email">Email address</label>
-                        <input type="email" class="form-control" name="old_email" aria-describedby="emailHelp" required>
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                      </div>
-                      <div class="form-group">
-                        <label for="new_email">New Email Address</label>
-                        <input type="email" class="form-control" name="new_email" required>
+                        <label for="new_genre">Genre</label>
+                        <input type="text" class="form-control" name="new_genre" aria-describedby="emailHelp" required>
+                        <small id="new_genre" class="form-text text-muted">Be creative!</small>
                       </div>
                       <button type="submit" id = "updateEmailSubmit" class="btn btn-get-started">Submit</button>
                     </form>
                   </div>
                 </div>
 
-                <div class="col-lg-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
+                <div class="col d-flex" data-aos="zoom-in" data-aos-delay="200">
                   <div class="icon-box iconbox-orange ">
                     <div class="icon">
                       <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
@@ -104,11 +100,33 @@
                       </svg>
                       <i class="bx bx-file"></i>
                     </div>
-                    <h4><a href="">View recently watched animes</a></h4>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                    <form action="" method="post">
-                      <input type="submit" class="btn btn-get-started mt-3" name="upvote" value="View Recents"/>
-                  </form>
+                    <h4><a href="">View all genres</a></h4>
+                    <p>See what genres are already added!</p>
+                  </div>
+                </div>
+                
+                <div class="col d-flex" data-aos="zoom-in" data-aos-delay="200">
+                  <div class="icon-box iconbox-orange ">
+                    <div class="icon">
+                      <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426"></path>
+                      </svg>
+                      <i class="bx bx-file"></i>
+                    </div>
+                    <h4><a href="">View all genres</a></h4>
+                    <p>See what genres are already added!</p>
+                  </div>
+                </div>
+                <div class="col d-flex" data-aos="zoom-in" data-aos-delay="200">
+                  <div class="icon-box iconbox-orange ">
+                    <div class="icon">
+                      <svg width="100" height="100" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="none" stroke-width="0" fill="#f5f5f5" d="M300,582.0697525312426C382.5290701553225,586.8405444964366,449.9789794690241,525.3245884688669,502.5850820975895,461.55621195738473C556.606425686781,396.0723002908107,615.8543463187945,314.28637112970534,586.6730223649479,234.56875336149918C558.9533121215079,158.8439757836574,454.9685369536778,164.00468322053177,381.49747125262974,130.76875717737553C312.15926192815925,99.40240125094834,248.97055460311594,18.661163978235184,179.8680185752513,50.54337015887873C110.5421016452524,82.52863877960104,119.82277516462835,180.83849132639028,109.12597500060166,256.43424936330496C100.08760227029461,320.3096726198365,92.17705696193138,384.0621239912766,124.79988738764834,439.7174275375508C164.83382741302287,508.01625554203684,220.96474134820875,577.5009287672846,300,582.0697525312426"></path>
+                      </svg>
+                      <i class="bx bx-file"></i>
+                    </div>
+                    <h4><a href="">View all genres</a></h4>
+                    <p>See what genres are already added!</p>
                   </div>
                 </div>
               </div>

@@ -46,6 +46,25 @@ app.get("/userprofile", (req, res) => { // test route
     res.sendFile('userprofile.html', { root: '.' })
 });
 
+app.get("/admin", (req, res) => {
+    res.sendFile('admin.html', {root: '.'})
+})
+
+app.post("/userprofile", (req, res) => {
+    const emails = req.body;
+    console.log(emails);
+    console.log(req.hostname);
+    request.post('http://localhost:3000/user/email',
+        {json: true, body: emails},
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+            }
+        }
+    );
+    res.sendFile('userprofile.html', {root: '.'});
+});
+
 // test routes
 app.put("/admin/genre", routes.addGenre);
 app.get("/genre/:is_safe", routes.getGenre);
