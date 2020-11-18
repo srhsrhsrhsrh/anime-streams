@@ -29,6 +29,28 @@ export default class Admin {
         });
     };
 
+    static getGenres = (_, response) => {
+        connection.query("SELECT * FROM genre", undefined, (err, res) => {
+            if (err) {
+                Response.sendResponseWithErr(response, err, "Error while retrieving genres");
+            } else {
+                console.log("All genres: ", {result: res});
+                response.send({result: res});
+            }
+        });
+    };
+
+    static getUsers = (_, response) => {
+        connection.query("SELECT * FROM user", undefined, (err, res) => {
+            if (err) {
+                Response.sendResponseWithErr(response, err, "Error while retrieving users");
+            } else {
+                console.log("Retrieved all users: " + {result: res});
+                response.send({result: res});
+            }
+        });
+    };
+
     static deleteAnime = (anime, response) => {
         connection.query("DELETE FROM anime WHERE anime_name=?", anime.body["anime_name"], (err, res) => {
             if (err) {
