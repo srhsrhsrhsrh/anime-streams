@@ -81,13 +81,14 @@
                     </div>
                     <h4><a href="">Add new Genre</a></h4>
                     <p>Add a new genre to sort animes by!</p>
-                    <form id="updateEmailForm" action="/userprofile" method="POST" name="updateEmailForm">
+                    <div id="genre_update_success_placeholder"></div>
+                    <form id="addGenreForm" action="/" name="addGenreForm">
                       <div class="form-group mt-4">
                         <label for="new_genre">Genre</label>
-                        <input type="text" class="form-control" name="new_genre" aria-describedby="emailHelp" required>
-                        <small id="new_genre" class="form-text text-muted">Be creative!</small>
+                        <input type="text" class="form-control" id="new_genre" name="new_genre" required>
+                        <small id="new_genre_help_text" class="form-text text-muted">Be creative!</small>
                       </div>
-                      <button type="submit" id = "updateEmailSubmit" class="btn btn-get-started">Submit</button>
+                      <button type="submit" id="addGenreSubmit" class="btn btn-get-started">Submit</button>
                     </form>
                   </div>
                 </div>
@@ -113,8 +114,17 @@
                       </svg>
                       <i class="bx bx-file"></i>
                     </div>
-                    <h4><a href="">View all genres</a></h4>
-                    <p>See what genres are already added!</p>
+                    <h4><a href="">Delete an anime</a></h4>
+                    <p>Delete an anime listing from the site</p>
+                    <div id="delete_video_success_placeholder"></div>
+                    <form id="deleteVideoForm" action="/" name="addGenreForm">
+                      <div class="form-group mt-4">
+                        <label for="new_genre">Anime Name</label>
+                        <input type="text" class="form-control" id="delete_video_name" name="delete_video_name" required>
+                        <small id="delete_video_help_text" class="form-text text-muted">Be sure that you actually want to delete this!</small>
+                      </div>
+                      <button type="submit" id="deleteVideoSubmit" class="btn btn-get-started">Submit</button>
+                    </form>
                   </div>
                 </div>
                 <div class="col d-flex" data-aos="zoom-in" data-aos-delay="200">
@@ -150,9 +160,33 @@
   <script src="assets/vendor/venobox/venobox.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
 
+  <!-- Recent watches modal -->
+  <div class="modal fade" id="recentWatchesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recently Watched</h5>
+          <button type="button" onclick="cleanModal()" class="close bg-dark text-white" id='recentsModalClose' data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+          <table class = "table table table-dark">
+            <thead>
+            <tr id = "tr_placeholder">
+              <th scope="col">Genre</th>
+            </tr>
+            </thead>
+            <tbody id="table_placeholder"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/user.js"></script>
+  <script src="assets/js/admin.js"></script>
 
 </body>
 

@@ -81,15 +81,16 @@
                     </div>
                     <h4><a href="">Update Email</a></h4>
                     <p>Please verify your current email, and enter a new email address in.</p>
-                    <form id="updateEmailForm" action="/userprofile" method="POST" name="updateEmailForm">
+                    <div id = "email_update_success_placeholder"></div>
+                    <form id="updateEmailForm" action="/" name="updateEmailForm">
                       <div class="form-group mt-4">
                         <label for="old_email">Email address</label>
-                        <input type="email" class="form-control" name="old_email" aria-describedby="emailHelp" required>
+                        <input type="email" class="form-control" name="old_email" id = "old_email" aria-describedby="emailHelp" required>
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                       </div>
                       <div class="form-group">
                         <label for="new_email">New Email Address</label>
-                        <input type="email" class="form-control" name="new_email" required>
+                        <input type="email" class="form-control" name="new_email" id="new_email" required>
                       </div>
                       <button type="submit" id = "updateEmailSubmit" class="btn btn-get-started">Submit</button>
                     </form>
@@ -105,9 +106,9 @@
                       <i class="bx bx-file"></i>
                     </div>
                     <h4><a href="">View recently watched animes</a></h4>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+
                     <form action="" method="post">
-                      <input type="submit" class="btn btn-get-started mt-3" name="upvote" value="View Recents"/>
+                      <input type="submit" class="btn btn-get-started mt-3" id="view_recents_submit" data-toggle="modal" data-target="#recentWatchesModal" name="upvote" value="View Recents"/>
                   </form>
                   </div>
                 </div>
@@ -115,7 +116,6 @@
             </div><!-- End .content-->
           </div>
         </div>
-
       </div>
     </section><!-- End Services Section -->
 
@@ -131,6 +131,32 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/venobox/venobox.min.js"></script>
   <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+
+  <!-- Recent watches modal -->
+  <div class="modal fade" id="recentWatchesModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recently Watched</h5>
+          <button type="button" onclick="cleanModal()" class="close bg-dark text-white" id='recentsModalClose' data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+          <table class = "table table table-dark">
+          <thead>
+          <tr id = "tr_placeholder">
+            <th scope="col">Anime</th>
+            <th scope="col">Ep #</th>
+            <th scope="col">Link</th>
+          </tr>
+          </thead>
+          <tbody id="table_placeholder"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
