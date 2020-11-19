@@ -3,6 +3,17 @@ import Response from './response.js';
 
 export default class User {
 
+    static getAnime = (_, response) => {
+        connection.query("select * from anime", undefined, (err, res) => {
+            if (err) {
+                Response.sendResponseWithErr(response, err, "Error while retrieving anime");
+            } else {
+                console.log("Retrieved all anime: ", {result: res});
+                response.send({result: res});
+            }
+        });
+    };
+
     static getSeries = (_, response) => {
         connection.query("select distinct has_episode.anime_name, series.num_eps " +
             "from series inner join has_episode " +

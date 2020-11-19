@@ -36,7 +36,7 @@ app.post("/", function(req, res) {
         "http://localhost:3000/user/create",
         {json: true, body: user},
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode === 200) {
                 console.log(body);
             } else {
                 console.log(error);
@@ -53,7 +53,7 @@ app.get("/userprofile", (req, res) => { // test route
 
 app.get("/admin", (req, res) => {
     res.sendFile('admin.html', {root: '.'})
-})
+});
 
 app.get("/browse", (req, res) => {
     res.sendFile('browse.html', {root: '.'})
@@ -66,7 +66,7 @@ app.post("/userprofile", (req, res) => {
     request.post('http://localhost:3000/user/email',
         {json: true, body: emails},
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode === 200) {
                 console.log(body);
             }
         }
@@ -77,6 +77,9 @@ app.post("/userprofile", (req, res) => {
 // test routes
 app.put("/admin/genre", routes.addGenre);
 app.get("/genre/:is_safe", routes.getGenre);
+app.get("/allGenres", routes.getGenres);
+app.get("/allAnime", routes.getAnime);
+app.get("/allUsers", routes.getUsers);
 
 app.get("/series/all", routes.getSeries);
 app.get("/movies/all", routes.getMovies);
