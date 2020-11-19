@@ -55,6 +55,10 @@ app.get("/admin", (req, res) => {
     res.sendFile('admin.html', {root: '.'})
 })
 
+app.get("/browse", (req, res) => {
+    res.sendFile('browse.html', {root: '.'})
+})
+
 app.post("/userprofile", (req, res) => {
     const emails = req.body;
     console.log(emails);

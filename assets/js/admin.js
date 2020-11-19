@@ -36,43 +36,45 @@ $(document.getElementById("deleteVideoSubmit")).on('click', function() {
         },
     });
     return false;
-
 })
 
-//TODO: Modify to reflect admin panel functionality
+$(document.getElementById("superUserSubmit")).on('click', function() {
+    const genreToQuery = document.getElementById('genre_name').value
+    $.ajax({
+        type: "GET",
+        url: `/watchedAll/${genreToQuery}`,
+        success: function (result) {
+            let data = JSON.parse(JSON.stringify(result))["result"]
+            console.log(data)
+            buildReturnModal(data)
+        },
+    });
+    return false;
+})
 
-// $(document.getElementById("view_recents_submit")).on('click', function() {
-//     const payload = {"email": "felixlei@hotmail.com"}
-//     const posting = $.ajax({
-//         type: "POST",
-//         url: "/user/watching",
-//         data: payload,
-//         success: function(result){
-//             let data = JSON.parse(JSON.stringify(result))["result"]
-//             console.log(data)
-//             for (let genre of data){
-//                 // create row entry
-//                 let newRow = document.createElement("tr")
-//                 // set 1st row entry + text
-//                 let col1Entry = document.createElement("td")
-//                 let rowAtt = document.createAttribute("scope")
-//                 rowAtt.value = "row"
-//                 col1Entry.setAttributeNode(rowAtt)
-//                 col1Entry.innerHTML = genre["anime_name"]
-//
-//                 let col2Entry = document.createElement("td")
-//                 col2Entry.innerHTML = anime["number"]
-//
-//                 let col3Entry = document.createElement("td")
-//                 col3Entry.innerHTML = anime["video_link"]
-//
-//                 newRow.appendChild(col1Entry)
-//                 newRow.appendChild(col2Entry)
-//                 newRow.appendChild(col3Entry)
-//                 document.getElementById("table_placeholder").appendChild(newRow)
-//             }
-//             $('#recentWatchesModal').modal()
-//         },
-//     });
-//     return false;
-// })
+$(document.getElementById("numVideosSubmit")).on('click', function() {
+    const numVideos = document.getElementById('num_videos').value
+    $.ajax({
+        type: "GET",
+        url: `/servers/hosting/${numVideos}`,
+        success: function (result) {
+            let data = JSON.parse(JSON.stringify(result))["result"]
+            console.log(data)
+            buildReturnModal(data)
+        },
+    });
+    return false;
+})
+
+$(document.getElementById("userActivitySubmit")).on('click', function() {
+    $.ajax({
+        type: "GET",
+        url: "/user_activity",
+        success: function (result) {
+            let data = JSON.parse(JSON.stringify(result))["result"]
+            console.log(data)
+            buildReturnModal(data)
+        },
+    });
+    return false;
+})
