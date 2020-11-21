@@ -8,3 +8,5 @@ the greatest anime streaming serivice Of All Time
 
 Note: use node version >= 14
 UI template: https://bootstrapmade.com/resi-free-bootstrap-html-template/
+
+![homepage](/assets/readme.png)
