@@ -1,6 +1,7 @@
 function cleanModal() {
     document.getElementById("table_placeholder").innerHTML = ""
     document.getElementById("tr_placeholder").innerHTML = ""
+    document.getElementById("modalTitlePlaceholder").innerText = ""
 }
 
 
