@@ -4,6 +4,28 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+$(document.getElementById("registerSubmit")).on('click', function() {
+  let user_name = document.getElementById("user_name").value
+  let password = document.getElementById("password").value
+  let email = document.getElementById("email").value
+  const payload = {"user_name": user_name, "password": password, "email": email}
+  $.ajax({
+    type: "PUT",
+    url: "/user/create",
+    contentType: 'application/json',
+    data: JSON.stringify(payload),
+    success: function(){
+      $("#register_update_success_placeholder").html('<div class="alert alert-success alert-dismissible fade show mt-4" role="alert">' +
+          '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>\n' +
+          '</button>'+
+          user_name + " Has Been Successfully Registered!" +
+          '</div>')
+    },
+  });
+  $("#registerModal").modal("hide")
+  return false;
+})
+
 !(function($) {
   "use strict";
 
