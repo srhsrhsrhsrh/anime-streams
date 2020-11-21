@@ -181,6 +181,15 @@
       </div>
     </div>
   </div>
+  <script>
+    var modal = document.getElementById('resultsModal');
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        cleanModal();
+      }
+    }
+  </script>
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
