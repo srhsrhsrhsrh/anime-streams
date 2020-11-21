@@ -74,7 +74,7 @@ export default class Admin {
     };
 
     static getUserActivity = (_, response) => {
-        connection.query("SELECT U.user_name, count(distinct WR.anime_name) " +
+        connection.query("SELECT U.user_name AS 'Username', count(distinct WR.anime_name) AS '# of Anime Reviewed' " +
             "FROM user U INNER JOIN writes_review WR ON U.email=WR.email " +
             "GROUP BY U.email ORDER BY count(distinct WR.anime_name) desc", undefined, (err, res) => {
             if (err) {
@@ -87,7 +87,7 @@ export default class Admin {
     };
 
     static getServersHosting = (num_videos, response) => {
-        connection.query("SELECT server.sname, COUNT(video.video_link) " +
+        connection.query("SELECT server.sname AS 'Server Name', COUNT(video.video_link) AS '# of Videos Hosted' " +
             "FROM server " +
             "INNER JOIN video ON server.server_link=video.server_link " +
             "GROUP BY server.sname HAVING COUNT(video.video_link)>=?", num_videos.params["num_videos"], (err, res) => {
@@ -101,7 +101,7 @@ export default class Admin {
     };
 
     static getAvgComments = (anime, response) => {
-        connection.query("SELECT B.anime_name, avg(cnt) AS avg_num_comments FROM " +
+        connection.query("SELECT B.anime_name AS 'Anime Name', avg(cnt) AS 'Average # of comments' FROM " +
                 "(SELECT E.anime_name, E.number, COUNT(C.id) AS cnt " +
                 "FROM has_episode E " +
                 "INNER JOIN comment C ON C.video_link=E.video_link " +
@@ -119,7 +119,7 @@ export default class Admin {
     };
 
     static getWatchersOfGenre = (genre, response) => {
-        connection.query("SELECT U.user_name, U.email FROM user U WHERE NOT EXISTS " +
+        connection.query("SELECT U.user_name AS 'Username', U.email FROM user U WHERE NOT EXISTS " +
             "(SELECT A.anime_name " +
             "FROM anime A INNER JOIN genre G " +
             "ON A.genre=G.genre " +
