@@ -1,10 +1,6 @@
-# Server docs
 1. Run `npm install` in the root project directory
-2. Populate your database with `source animeSQLGeneric.sql` and add MySQL credentials to `/config/db-config.js`
+2. Populate your database by running MySQL in the `/scripts` directory with `source animeSQLGeneric.sql` and add MySQL credentials to `/config/db-config.js`
 3. Run `npm start` 
-
-Example PUT: `curl -X PUT -H "Content-Type: application/json" -d '{"genre":"romance", "is_safe":1}' localhost:3000/admin/genre`
+4. Open `localhost:3000` in your browser
 
 Note: use node version >= 14
-
-# Client docs
