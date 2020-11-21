@@ -13,6 +13,18 @@ export default class Router {
         Admin.getGenre(genre, response);
     }
 
+    static getGenres(_, response) {
+        Admin.getGenres(_, response);
+    }
+
+    static getAnime(_, response) {
+        User.getAnime(_, response);
+    }
+
+    static getUsers(_, response) {
+        Admin.getUsers(_, response);
+    }
+
     static getSeries(_, response) {
         User.getSeries(_, response);
     }

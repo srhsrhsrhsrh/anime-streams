@@ -3,6 +3,17 @@ import Response from './response.js';
 
 export default class User {
 
+    static getAnime = (_, response) => {
+        connection.query("select * from anime", undefined, (err, res) => {
+            if (err) {
+                Response.sendResponseWithErr(response, err, "Error while retrieving anime");
+            } else {
+                console.log("Retrieved all anime: ", {result: res});
+                response.send({result: res});
+            }
+        });
+    };
+
     static getSeries = (_, response) => {
         connection.query("select distinct has_episode.anime_name, series.num_eps " +
             "from series inner join has_episode " +
@@ -51,7 +62,7 @@ export default class User {
     };
 
     static getEpisodes = (anime, response) => {
-        connection.query("SELECT anime.anime_name, has_episode.number, has_episode.video_link " +
+        connection.query("SELECT anime.anime_name AS 'Anime Name', has_episode.number AS 'Episode #', has_episode.video_link AS 'Source' " +
                          "FROM anime INNER JOIN has_episode " +
                          "WHERE anime.anime_name=has_episode.anime_name AND anime.anime_name=?",
             decodeURI(anime.params["anime_name"]), (err, res) => {
@@ -65,7 +76,7 @@ export default class User {
     };
 
     static getWatching = (email, response) => {
-        connection.query("SELECT anime_name, number, video_link FROM watches WHERE email=?",
+        connection.query("SELECT anime_name AS 'Anime Name', number 'Last Episode Watched', video_link AS 'Source' FROM watches WHERE email=?",
             email.body["email"], (err, res) => {
             if (err) {
                 Response.sendResponseWithErr(response, err, "Error while retrieving watch list");
@@ -77,7 +88,7 @@ export default class User {
     };
 
     static getFilteredAnime = (filters, response) => {
-        connection.query("SELECT anime_name " +
+        connection.query("SELECT anime_name AS 'Anime Name' " +
                          "FROM anime INNER JOIN genre " +
                          "WHERE anime.genre=genre.genre AND is_safe=? AND " +
                          "anime.anime_name LIKE" + connection.escape(filters.params["first_letter"]+'%'),

@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './controller/routes.js';
+import request from 'request';
 const app = express();
 
 // parse requests of content-type: application/json
@@ -16,13 +17,55 @@ app.use(function(req, res, next) {
     return next();
 });
 
+app.use("/assets", express.static('.' + '/assets'));
+
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded());
+
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+
 app.get("/", (req, res) => { // test route
-    res.json({ message: "304 simp gang" });
+    res.sendFile('index.html', { root: '.' })
+});
+
+app.post("/", function(req, res) {
+    res.sendFile('index.html', { root: '.'})
+});
+
+app.get("/userprofile", (req, res) => { // test route
+    res.sendFile('userprofile.html', { root: '.' })
+});
+
+app.get("/admin", (req, res) => {
+    res.sendFile('admin.html', {root: '.'})
+});
+
+app.get("/browse", (req, res) => {
+    res.sendFile('browse.html', {root: '.'})
+})
+
+app.post("/userprofile", (req, res) => {
+    const emails = req.body;
+    console.log(emails);
+    console.log(req.hostname);
+    request.post('http://localhost:3000/user/email',
+        {json: true, body: emails},
+        function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                console.log(body);
+            }
+        }
+    );
+    res.sendFile('userprofile.html', {root: '.'});
 });
 
 // test routes
 app.put("/admin/genre", routes.addGenre);
 app.get("/genre/:is_safe", routes.getGenre);
+app.get("/allGenres", routes.getGenres);
+app.get("/allAnime", routes.getAnime);
+app.get("/allUsers", routes.getUsers);
 
 app.get("/series/all", routes.getSeries);
 app.get("/movies/all", routes.getMovies);
